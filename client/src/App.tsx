@@ -1,6 +1,11 @@
-import React from 'react';
-import './App.css';
 import axios from 'axios';
+import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import './App.css';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+
 
 class App extends React.Component {
   state = {
@@ -21,12 +26,27 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          GoodThings
-        </header>
-        {this.state.data}
-      </div>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <h1>GoodThings</h1>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/register">Register</Link></li>
+              <li><Link to="/login">Login</Link></li>
+            </ul>
+          </header>
+          <main>
+            <Route path="/">
+              {this.state.data}
+            </Route>
+            <Routes>
+              <Route path="/register" element={Register} />
+              <Route path="/login" element={Login} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
     );
   }
 }
